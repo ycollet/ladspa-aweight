@@ -1,6 +1,6 @@
 /*
   Copyright (C) 2005 Fons Adriaensen
-    
+
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
@@ -25,22 +25,23 @@
 #include "aweight.h"
 
 
-class AWplug : public LadspaPlugin
-{
-public:
+class AWplug : public LadspaPlugin {
+  public:
 
     enum { INP, OUT, NPORT };
 
-    AWplug (unsigned long fsam) : LadspaPlugin (fsam) { _filt.init (fsam); }
-    virtual void setport (unsigned long port, LADSPA_Data *data);  
-    virtual void active  (bool act);  
+    AWplug (unsigned long fsam) : LadspaPlugin (fsam) {
+        _filt.init (fsam);
+    }
+    virtual void setport (unsigned long port, LADSPA_Data *data);
+    virtual void active  (bool act);
     virtual void runproc (unsigned long len, bool add);
-    virtual ~AWplug (void) {}  
+    virtual ~AWplug (void) {}
 
-private:
+  private:
 
     float   *_port [NPORT];
-    Aweight  _filt;    
+    Aweight  _filt;
 };
 
 

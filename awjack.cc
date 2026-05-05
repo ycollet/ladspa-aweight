@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2005 Fons Adriaensen <fons.adriaensen@skynet.be>
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -23,9 +23,8 @@
 #include "aweight.h"
 
 
-class AWtest
-{
-public:
+class AWtest {
+  public:
 
     AWtest (void);
     int process (jack_nframes_t nframes);
@@ -35,38 +34,34 @@ public:
 
     Aweight      _awfilt;
 
-private:
+  private:
 
 };
 
 
-AWtest::AWtest (void)
-{
+AWtest::AWtest (void) {
 }
 
 
-int AWtest::process (jack_nframes_t nframes)
-{
+int AWtest::process (jack_nframes_t nframes) {
     jack_default_audio_sample_t *ip = (jack_default_audio_sample_t *) jack_port_get_buffer (_iport, nframes);
     jack_default_audio_sample_t *op = (jack_default_audio_sample_t *) jack_port_get_buffer (_oport, nframes);
 
     _awfilt.process (nframes, ip, op);
 
-    return 0;  
+    return 0;
 }
 
 
 // --------------------------------------------------------------------------------------------------------------
 
 
-static int process (jack_nframes_t nframes, void *arg)
-{
-    return ((AWtest *) arg)->process (nframes); 
+static int process (jack_nframes_t nframes, void *arg) {
+    return ((AWtest *) arg)->process (nframes);
 }
 
 
-extern "C" int jack_initialize (jack_client_t *client, const char *data)
-{
+extern "C" int jack_initialize (jack_client_t *client, const char *data) {
     AWtest *A = new AWtest;
 
     jack_set_process_callback (client, process, A);
@@ -81,9 +76,8 @@ extern "C" int jack_initialize (jack_client_t *client, const char *data)
 }
 
 
-extern "C" void jack_finish (void *arg)
-{
-   delete (AWtest *) arg;    
+extern "C" void jack_finish (void *arg) {
+    delete (AWtest *) arg;
 }
 
 

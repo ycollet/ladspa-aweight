@@ -1,6 +1,6 @@
 /*
     Copyright (C) 2005 Fons Adriaensen <fons.adriaensen@skynet.be>
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -24,9 +24,8 @@
 #include <stdlib.h>
 
 
-class Aweight
-{
-public:
+class Aweight {
+  public:
 
     Aweight (void) {}
     ~Aweight (void) {}
@@ -35,7 +34,7 @@ public:
     void reset (void);
     void process (size_t n, const float *in, float *out);
 
-private:
+  private:
 
     float _w1, _w2, _w3, _w4, _g;             // filter coefficients and gain
     float _z1a, _z1b, _z2, _z3, _z4a, _z4b;   // filter state
